@@ -567,7 +567,7 @@
   },
   "Item": {
     "types": [
-      "ability", "armour", "career", "criticaldamage", "criticalinjury", "malignancy", "forcepower", "gear", "itemattachment", "itemmodifier", "talent", "shipattachment", "shipweapon", "homesteadupgrade", "signatureability", "specialization", "species", "weapon"],
+      "ability", "armour", "career", "criticaldamage", "criticalinjury", "malignancy", "feartrauma", "forcepower", "gear", "itemattachment", "itemmodifier", "talent", "shipattachment", "shipweapon", "homesteadupgrade", "signatureability", "specialization", "species", "weapon"],
     "templates": {
       "core": {
         "description": "",
@@ -784,6 +784,10 @@
       "templates": ["core"],
       "min": 0,
       "max": 0
+    },
+    "feartrauma": {
+      "templates": ["core"],
+      "severity": 1
     },
     "forcepower": {
       "templates": ["core"],

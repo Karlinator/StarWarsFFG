@@ -91,6 +91,7 @@ export class ItemSheetFFG extends ItemSheet {
       case "criticalinjury":
       case "criticaldamage":
       case "malignancy":
+      case 'feartrauma':
         this.position.width = 320;
         this.position.height = 500;
         break;

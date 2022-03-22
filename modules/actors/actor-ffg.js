@@ -545,6 +545,12 @@ export class ActorFFG extends Actor {
           total = data.attributes.Willpower.value + speciesWillpower;
         }
       }
+      if (key === "Corruption") {
+        if (data.attributes.Corruption.value === 0) {
+          const speciesWillpower = ModifierHelpers.getBaseValue(items, "Willpower", "Characteristic");
+          total = data.attributes.Willpower.value + speciesWillpower + 10;
+        }
+      }
       if (key === "Encumbrance") {
         total = 5 + data.characteristics.Brawn.value;
       }

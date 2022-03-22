@@ -38,6 +38,12 @@
             "max": 0,
             "adjusted": 0
           },
+          "corruption": {
+            "value": 0,
+            "min": 0,
+            "max": 0,
+            "adjusted": 0
+          },
           "soak": {
             "value": 0,
             "adjusted": 0

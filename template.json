@@ -394,7 +394,16 @@
       }
     },
     "character": {
-      "templates": ["biography", "species", "career", "specialisation", "stats", "characteristics", "skills", "attributes"],
+      "templates": [
+        "biography",
+        "species",
+        "career",
+        "specialisation",
+        "stats",
+        "characteristics",
+        "skills",
+        "attributes"
+      ],
       "encumbrance": {
         "value": 0,
         "type": "Number",
@@ -428,7 +437,13 @@
       }
     },
     "minion": {
-      "templates": ["biography", "stats", "characteristics", "skills", "attributes"],
+      "templates": [
+        "biography",
+        "stats",
+        "characteristics",
+        "skills",
+        "attributes"
+      ],
       "quantity": {
         "value": 1,
         "max": 1,
@@ -521,14 +536,14 @@
           "label": "Hard Points",
           "adjusted": 0
         },
-        "hyperdrive" : {
-          "value" : 1,
+        "hyperdrive": {
+          "value": 1,
           "type": "Number",
           "label": "SWFFG.Hyperdrive"
         },
-        "consumables" : {
-          "value" : 1,
-          "duration" : "months",
+        "consumables": {
+          "value": 1,
+          "duration": "months",
           "type": "Number",
           "label": "SWFFG.Consumables"
         }
@@ -542,9 +557,9 @@
         "label": "Cost",
         "adjusted": 0
       },
-      "consumables" : {
-        "value" : 1,
-        "duration" : "months",
+      "consumables": {
+        "value": 1,
+        "duration": "months",
         "type": "Number",
         "label": "SWFFG.Consumables"
       }
@@ -552,7 +567,7 @@
   },
   "Item": {
     "types": [
-      "ability", "armour", "career", "criticaldamage", "criticalinjury", "forcepower", "gear", "itemattachment", "itemmodifier", "talent", "shipattachment", "shipweapon", "homesteadupgrade", "signatureability", "specialization", "species", "weapon"],
+      "ability", "armour", "career", "criticaldamage", "criticalinjury", "malignancy", "forcepower", "gear", "itemattachment", "itemmodifier", "talent", "shipattachment", "shipweapon", "homesteadupgrade", "signatureability", "specialization", "species", "weapon"],
     "templates": {
       "core": {
         "description": "",
@@ -602,9 +617,9 @@
         }
       },
       "itemattachments": {
-        "itemattachment":[]
+        "itemattachment": []
       },
-      "qualities" : {
+      "qualities": {
         "itemmodifier": [],
         "adjusteditemmodifer": []
       }
@@ -613,7 +628,14 @@
       "templates": ["core", "basic", "itemattachments", "qualities"]
     },
     "weapon": {
-      "templates": ["core", "basic", "hardpoints", "equippable", "itemattachments", "qualities"],
+      "templates": [
+        "core",
+        "basic",
+        "hardpoints",
+        "equippable",
+        "itemattachments",
+        "qualities"
+      ],
       "skill": {
         "value": "Ranged: Light",
         "type": "String",
@@ -646,7 +668,14 @@
       }
     },
     "armour": {
-      "templates": ["core", "basic", "hardpoints", "equippable", "itemattachments", "qualities"],
+      "templates": [
+        "core",
+        "basic",
+        "hardpoints",
+        "equippable",
+        "itemattachments",
+        "qualities"
+      ],
       "defence": {
         "value": 0,
         "type": "Number",
@@ -679,7 +708,14 @@
       "trees": []
     },
     "shipweapon": {
-      "templates": ["core", "basic", "hardpoints", "equippable", "itemattachments", "qualities"],
+      "templates": [
+        "core",
+        "basic",
+        "hardpoints",
+        "equippable",
+        "itemattachments",
+        "qualities"
+      ],
       "label": "Ship Weapon",
       "firingarc": {
         "fore": false,
@@ -716,7 +752,14 @@
       }
     },
     "shipattachment": {
-      "templates": ["core", "basic", "hardpoints", "equippable", "itemattachments", "qualities"],
+      "templates": [
+        "core",
+        "basic",
+        "hardpoints",
+        "equippable",
+        "itemattachments",
+        "qualities"
+      ],
       "label": "Ship Attachment"
     },
     "species": {
@@ -736,6 +779,11 @@
     },
     "ability": {
       "templates": ["core"]
+    },
+    "malignancy": {
+      "templates": ["core"],
+      "min": 0,
+      "max": 0
     },
     "forcepower": {
       "templates": ["core"],
@@ -783,7 +831,7 @@
         "talent19": {}
       }
     },
-    "career" : {
+    "career": {
       "templates": ["core"]
     },
     "signatureability": {
@@ -800,7 +848,13 @@
       }
     },
     "itemattachment": {
-      "templates": ["core", "basic", "hardpoints", "qualities", "itemattachments"],
+      "templates": [
+        "core",
+        "basic",
+        "hardpoints",
+        "qualities",
+        "itemattachments"
+      ],
       "type": ""
     },
     "itemmodifier": {

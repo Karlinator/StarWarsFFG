@@ -10,13 +10,14 @@ export default class TemplateHelpers {
       "systems/starwarsffg/templates/parts/actor/ffg-abilities.html",
       "systems/starwarsffg/templates/parts/actor/ffg-forcepowers.html",
       "systems/starwarsffg/templates/parts/actor/ffg-criticalinjury.html",
+      "systems/starwarsffg/templates/parts/actor/ffg-malignancy.html",
       "systems/starwarsffg/templates/parts/shared/ffg-block.html",
       "systems/starwarsffg/templates/parts/actor/ffg-signatureability.html",
       "systems/starwarsffg/templates/chat/roll-forcepower-card.html",
       "systems/starwarsffg/templates/chat/roll-weapon-card.html",
       "systems/starwarsffg/templates/chat/roll-vehicle-card.html",
       "systems/starwarsffg/templates/parts/shared/ffg-tabs.html",
-      "systems/starwarsffg/templates/parts/actor/ffg-healingitem.html"
+      "systems/starwarsffg/templates/parts/actor/ffg-healingitem.html",
     ];
 
     return loadTemplates(templatePaths);

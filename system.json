@@ -1,7 +1,7 @@
 {
   "name": "starwarsffg",
-  "title": "Star Wars FFG",
-  "description": "A system for playing Star Wars FFG games.",
+  "title": "Star Wars FFG, Dark Heresy fork",
+  "description": "Unpublished fork of Star Wars FFG. Not possible to install side by side.",
   "version": "1.72",
   "minimumCoreVersion": "0.8.9",
   "compatibleCoreVersion": "9",
@@ -43,8 +43,8 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "wounds",
   "secondaryTokenAttribute": "strain",
-  "url": "https://github.com/StarWarsFoundryVTT/StarWarsFFG",
-  "manifest": "https://raw.githubusercontent.com/StarWarsFoundryVTT/StarWarsFFG/v1.72/system.json",
-  "download": "https://github.com/StarWarsFoundryVTT/StarWarsFFG/releases/download/v1.72/starwarsffg_1.72.zip",
+  "url": "https://github.com/Karlinator/StarWarsFFG",
+  "manifest": "https://raw.githubusercontent.com/Karlinator/StarWarsFFG/dark-heresy/system.json",
+  "download": "https://github.com/Karlinator/StarWarsFFG/releases/download/v1.72-darkheresy/darkheresygenesys_1.72.zip",
   "license": "LICENSE.txt"
 }

@@ -10,6 +10,7 @@ export default class TemplateHelpers {
       "systems/starwarsffg/templates/parts/actor/ffg-forcepowers.html",
       "systems/starwarsffg/templates/parts/actor/ffg-criticalinjury.html",
       "systems/starwarsffg/templates/parts/actor/ffg-malignancy.html",
+      "systems/starwarsffg/templates/parts/actor/ffg-feartrauma.html",
       "systems/starwarsffg/templates/parts/shared/ffg-block.html",
       "systems/starwarsffg/templates/parts/actor/ffg-signatureability.html",
       "systems/starwarsffg/templates/chat/roll-forcepower-card.html",

@@ -572,6 +572,7 @@
       "criticaldamage",
       "criticalinjury",
       "malignancy",
+      "feartrauma",
       "forcepower",
       "gear",
       "itemattachment",
@@ -798,6 +799,10 @@
       "templates": ["core"],
       "min": 0,
       "max": 0
+    },
+    "feartrauma": {
+      "templates": ["core"],
+      "severity": 1
     },
     "forcepower": {
       "templates": ["core"],

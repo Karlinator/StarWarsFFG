@@ -275,7 +275,7 @@ img {
   clip-path: polygon(0% var(--notchSize), var(--notchSize) 0%, calc(100% - var(--notchSize)) 0%, 100% var(--notchSize), 100% calc(100% - var(--notchSize)), calc(100% - var(--notchSize)) 100%, var(--notchSize) 100%, 0% calc(100% - var(--notchSize)));
 }
 .starwarsffg.sheet.actor.adversary .character .sheet-body .skillsTablesGrid {
-  height: calc(100% - 32.1875rem);
+  height: calc(100% - 33.5rem);
 }
 .starwarsffg.sheet.actor .character .header-fields {
   flex: 1;
@@ -473,7 +473,7 @@ img {
   height: calc(100% + 26.25rem);
 }
 .starwarsffg.sheet.actor .character .sheet-body .skillsTablesGrid {
-  height: calc(100% - 32.1875rem);
+  height: calc(100% - 35.5rem);
   overflow: auto;
 }
 .starwarsffg.sheet.actor .character .sheet-body table.force-powers {
@@ -1891,7 +1891,7 @@ img {
   height: calc(100% + 26.25rem);
 }
 .starwarsffg .minion .sheet-body .skillsTablesGrid {
-  height: calc(100% - 32.1875rem);
+  height: calc(100% - 35.5rem);
   overflow: auto;
 }
 .starwarsffg.sheet.actor.v2 .minion .sheet-body .skillsTablesGrid {

@@ -97,7 +97,7 @@ export class ActorSheetFFG extends ActorSheet {
         }
         // we need to update all specialization talents with the latest talent information
         if (!this.actor.flags.starwarsffg?.loaded) {
-          this._updateSpecialization(data);
+          // this._updateSpecialization(data);
         }
 
         if (data.data.stats.credits.value > 999) {

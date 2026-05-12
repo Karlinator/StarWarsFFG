@@ -613,7 +613,7 @@
       "armour",
       "career",
       "criticaldamage", "criticalinjury",
-      "malignancy",
+      "malignancy", "feartrauma",
       "forcepower",
       "gear",
       "itemattachment", "itemmodifier",
@@ -830,6 +830,10 @@
       "templates": ["core"],
       "min": 0,
       "max": 0
+    },
+    "feartrauma": {
+      "templates": ["core"],
+      "severity": 1
     },
     "criticaldamage": {
       "templates": ["core"],

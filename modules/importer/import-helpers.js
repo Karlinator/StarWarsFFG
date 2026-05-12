@@ -3098,6 +3098,8 @@ export default class ImportHelpers {
               inherentEffect.changes[inherentEffectChangeIndex].value = parseInt(inherentEffect.changes[inherentEffectChangeIndex].value) + parseInt(item.system.attributes.Brawn.value);
             } else if (modPath === "system.stats.strain.max" && item.type === "species") {
               inherentEffect.changes[inherentEffectChangeIndex].value = parseInt(inherentEffect.changes[inherentEffectChangeIndex].value) + parseInt(item.system.attributes.Willpower.value);
+            } else if (modPath === "system.stats.corruption.max" && item.type === "species") {
+              inherentEffect.changes[inherentEffectChangeIndex].value = parseInt(inherentEffect.changes[inherentEffectChangeIndex].value) + parseInt(item.system.attributes.Willpower?.value || 0) + 10;
             } else if (modPath === "system.stats.encumbrance.max" && item.type === "species") {
               inherentEffect.changes[inherentEffectChangeIndex].value = parseInt(inherentEffect.changes[inherentEffectChangeIndex].value) + 5;
             } else {

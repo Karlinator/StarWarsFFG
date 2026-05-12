@@ -200,6 +200,20 @@ export class ActorFFG extends Actor {
             }
           );
         }
+        if (this.system.stats?.corruption) {
+          const originalCorruption = this.system.stats?.corruption.max;
+          const originalCorruptionWithoutWillpower = originalCorruption - originalWillpower;
+          const updatedCorruption = originalCorruptionWithoutWillpower + updatedWillpower;
+          CONFIG.logger.debug(`The character sheet showed ${originalCorruption} corruption threshold, while that value without Willpower was ${originalCorruptionWithoutWillpower}. Updating to be ${updatedCorruption}`);
+          changes.system.stats = foundry.utils.mergeObject(
+            changes.system.stats,
+            {
+              corruption: {
+                max: updatedCorruption,
+              }
+            }
+          );
+        }
       }
     }
     await super._preUpdate(changes, options, user);
@@ -708,7 +722,7 @@ export class ActorFFG extends Actor {
 
     // Determine the updates to make to the actor data
     let updates;
-    if (isBar && ["stats.wounds", "stats.strain", "stats.hullTrauma", "stats.systemStrain"].includes(attribute)) {
+    if (isBar && ["stats.wounds", "stats.strain", "stats.corruption", "stats.hullTrauma", "stats.systemStrain"].includes(attribute)) {
       updates = {[`system.${attribute}.value`]: Math.max(update, 0)};
     } else if (isBar) {
       updates = {[`system.${attribute}.value`]: Math.clamp(update, 0, attr.max)};

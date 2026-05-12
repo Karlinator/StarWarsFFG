@@ -40,6 +40,10 @@ export const character_stats = {
     value: "Strain",
     label: "SWFFG.Strain",
   },
+  "corruption": {
+    value: "Corruption",
+    label: "SWFFG.Corruption",
+  },
   "soak": {
     value: "Soak",
     label: "SWFFG.Soak",

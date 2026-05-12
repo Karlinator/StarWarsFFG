@@ -497,7 +497,7 @@ export default class ModifierHelpers {
    * @returns {string}
    */
   static getModKeyPath(modType, mod) {
-    if (["Wounds", "Strain", "EncumbranceMax", "Speed", "Hulltrauma", "Systemstrain"].includes(mod)) {
+    if (["Wounds", "Strain", "Corruption", "EncumbranceMax", "Speed", "Hulltrauma", "Systemstrain"].includes(mod)) {
       modType = "Threshold";
     }
     if (modType === "Characteristic") {
@@ -771,6 +771,9 @@ export default class ModifierHelpers {
           change.value = parseInt(wounds) + parseInt(newBrawn);
         } else if (change.key === "system.stats.strain.max") {
           change.value = parseInt(strain) + parseInt(newWillpower);
+        } else if (change.key === "system.stats.corruption.max") {
+          const corruption = formData?.data?.attributes?.Corruption?.value || item.system.attributes.Corruption?.value || 0;
+          change.value = parseInt(corruption) + parseInt(newWillpower) + 10;
         } else if (change.key === "system.stats.encumbrance.max") {
           change.value = parseInt(newBrawn) + 5;
         }

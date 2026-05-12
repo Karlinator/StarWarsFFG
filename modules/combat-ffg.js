@@ -138,7 +138,7 @@ export class CombatFFG extends Combat {
 
   /** @override */
   async _getInitiativeRoll(combatant, formula) {
-    const cData = foundry.utils.duplicate(combatant.actor.system);
+    const cData = foundry.utils.deepClone(combatant.actor.system);
 
     if (combatant.actor.type === "vehicle") {
       return new RollFFG("0");

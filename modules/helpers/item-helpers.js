@@ -21,7 +21,7 @@ export default class ItemHelpers {
     // Remove attributes which are no longer used
     if (this.object.system?.attributes) {
       for (let k of Object.keys(this.object.system.attributes)) {
-        if (!attributes.hasOwnProperty(k)) attributes[`-=${k}`] = null;
+        if (!attributes.hasOwnProperty(k)) attributes[k] = new foundry.data.operators.ForcedDeletion();
       }
     }
 
@@ -61,7 +61,7 @@ export default class ItemHelpers {
             // Remove attributes which are no longer used
             if (spec?.system?.talents?.[parent.talent]?.attributes) {
               for (let k of Object.keys(spec.system.talents[parent.talent].attributes)) {
-                if (!formData.data.attributes.hasOwnProperty(k)) formData.data.attributes[`-=${k}`] = null;
+                if (!formData.data.attributes.hasOwnProperty(k)) formData.data.attributes[k] = new foundry.data.operators.ForcedDeletion();
               }
             }
 

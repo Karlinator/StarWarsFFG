@@ -25,7 +25,7 @@ export default class CrewSettings extends FormApplication {
       if (!setting.key.includes("arrayCrewRoles") || (!canConfigure && setting.scope !== "client")) continue;
 
       // Update setting data
-      const s = foundry.utils.duplicate(setting);
+      const s = foundry.utils.deepClone(setting);
       s.name = game.i18n.localize(s.name);
       s.hint = game.i18n.localize(s.hint);
       s.value = game.settings.get(s.namespace, s.key);

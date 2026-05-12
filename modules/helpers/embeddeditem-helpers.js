@@ -59,29 +59,12 @@ export default class EmbeddedItemHelpers {
   static async updateRealObject(temporaryItem, data) {
     // TODO: drop parents once the refactor is done
     const {realItem, flagHierarchy: parents} = await EmbeddedItemHelpers._getRealItem(temporaryItem);
-    // this code was mostly written by Phind
-    // removing a key from a dict in Foundry requires submitting it with a new key of `-=key` and a value of null
-    // without explicitly replacing values, we end up duplicating entries instead of removing the one
-    // so instead, we go and manually remove any mods which have been deleted
-
-    // find any deleted attributes
-    const deleted_keys = EmbeddedItemHelpers.findKeysIncludingStringRecursively(
-        data,
-        '-=attr',
-    );
-    // remove matching attributes from the existing object
+    // find any attributes marked for deletion and remove them from the existing objects
+    const deleted_keys = EmbeddedItemHelpers.findForcedDeletionKeysRecursively(data);
     deleted_keys.forEach(function (cur_key) {
-      cur_key = cur_key.substring(2);
-      EmbeddedItemHelpers.removeKeyFromObject(
-          temporaryItem,
-          cur_key,
-      );
-      EmbeddedItemHelpers.removeKeyFromObject(
-          realItem,
-          cur_key,
-      );
+      EmbeddedItemHelpers.removeKeyFromObject(temporaryItem, cur_key);
+      EmbeddedItemHelpers.removeKeyFromObject(realItem, cur_key);
     });
-    // this is the end of the de-duplicating -=key stuff
 
     if (!realItem) {
       ui.notifications.error("Could not locate the real item, aborting action");
@@ -325,6 +308,20 @@ export default class EmbeddedItemHelpers {
         }
         if (typeof obj[key] === 'object') {
           keys = keys.concat(EmbeddedItemHelpers.findKeysIncludingStringRecursively(obj[key], str));
+        }
+      }
+    }
+    return keys;
+  }
+
+  static findForcedDeletionKeysRecursively(obj) {
+    let keys = [];
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (obj[key] instanceof foundry.data.operators.ForcedDeletion) {
+          keys.push(key);
+        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+          keys = keys.concat(EmbeddedItemHelpers.findForcedDeletionKeysRecursively(obj[key]));
         }
       }
     }

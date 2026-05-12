@@ -1454,7 +1454,7 @@ export class ActorSheetFFG extends foundry.appv1.sheets.ActorSheet {
       event.preventDefault();
       const a = event.currentTarget;
       const id = a.dataset["id"];
-      this.object.update({ "system.dutylist": { ["-=" + id]: null } });
+      this.object.update({ "system.dutylist": { [id]: new foundry.data.operators.ForcedDeletion() } });
     });
 
     html.find(".force-conflict .enable-dice-pool").on("click", async (event) => {
@@ -1924,7 +1924,7 @@ export class ActorSheetFFG extends foundry.appv1.sheets.ActorSheet {
       ui.notifications.info("You can only remove custom skills");
       return;
     }
-    await this.object.update({ [`system.skills.-=${ability}`]: null });
+    await this.object.update({ [`system.skills.${ability}`]: new foundry.data.operators.ForcedDeletion() });
   }
 
   /**
@@ -2051,7 +2051,7 @@ export class ActorSheetFFG extends foundry.appv1.sheets.ActorSheet {
       let sameActor = data.actorId === this.actor.id;
       if (!sameActor) {
         try {
-          this.actor.createEmbeddedDocuments("Item", [foundry.utils.duplicate(data.data)]); // Create a new Item
+          this.actor.createEmbeddedDocuments("Item", [foundry.utils.deepClone(data.data)]); // Create a new Item
           let token;
           if (game.scenes.current) {
             token = game.scenes.current.tokens.get(data?.tokenId);

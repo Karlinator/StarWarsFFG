@@ -9,7 +9,7 @@ class ffgSettings extends FormApplication {
     let includeSettings = [];
     for (const setting of game.settings.settings) {
       if (acceptableSettings.includes(setting[0])) {
-        const s = foundry.utils.duplicate(setting[1]);
+        const s = foundry.utils.deepClone(setting[1]);
         s.name = game.i18n.localize(s.name);
         s.hint = game.i18n.localize(s.hint);
         s.value = game.settings.get(s.namespace, s.key);

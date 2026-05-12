@@ -45,28 +45,11 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
   /** @override */
   async getData(options) {
     let data = super.getData(options);
-    // this code was mostly written by Phind
-    // removing a key from a dict in Foundry requires submitting it with a new key of `-=key` and a value of null
-    // without explicitly replacing values, we end up duplicating entries instead of removing the one
-    // so instead, we go and manually remove any mods which have been deleted
-
-    // find any deleted attributes
-    const deleted_keys = EmbeddedItemHelpers.findKeysIncludingStringRecursively(
-        data,
-        '-=attr',
-    );
-    // remove matching attributes from the existing object
+    // find any attributes marked for deletion and remove them from the data
+    const deleted_keys = EmbeddedItemHelpers.findForcedDeletionKeysRecursively(data);
     deleted_keys.forEach(function (cur_key) {
-      EmbeddedItemHelpers.removeKeyFromObject(
-        data,
-        cur_key,
-      );
-      EmbeddedItemHelpers.removeKeyFromObject(
-        data,
-        cur_key,
-      );
+      EmbeddedItemHelpers.removeKeyFromObject(data, cur_key);
     });
-    // this is the end of the de-duplicating -=key stuff
 
     data.data = data.item.system;
 
@@ -769,12 +752,12 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
         if (itemType === "specialization") {
           const updateData = this.object.system.specializations;
           delete updateData[itemId];
-          updateData[`-=${itemId}`] = null;
+          updateData[itemId] = new foundry.data.operators.ForcedDeletion();
           this.object.update({system: {specializations: updateData}})
         } else if (itemType === "signatureability") {
           const updateData = this.object.system.signatureabilities;
           delete updateData[itemId];
-          updateData[`-=${itemId}`] = null;
+          updateData[itemId] = new foundry.data.operators.ForcedDeletion();
           this.object.update({system: {signatureabilities: updateData}})
         }
       });
@@ -813,7 +796,7 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
           if (itemType === "talent") {
             const updateData = this.object.system.talents;
             delete updateData[itemId];
-            updateData[`-=${itemId}`] = null;
+            updateData[itemId] = new foundry.data.operators.ForcedDeletion();
             await this.object.update({system: {talents: updateData}})
           }
         });
@@ -1872,7 +1855,7 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
       const existingEffects = specialization.getEmbeddedCollection("ActiveEffect");
       const toDelete = [];
       for (const attr of Object.keys(existingAttrs)) {
-        updateData.system.talents[talentId].attributes[`-=${attr}`] = null;
+        updateData.system.talents[talentId].attributes[attr] = new foundry.data.operators.ForcedDeletion();
         const matchingEffect = existingEffects.find(ae => ae.name === attr);
         if (matchingEffect) {
           toDelete.push(matchingEffect.id);
@@ -1915,7 +1898,7 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
     }
 
     // as of v10, "id" is not passed in - instead, "uuid" is. Let's use the Foundry API to get the item Document from the uuid.
-    let itemObject = foundry.utils.duplicate(await fromUuid(data.uuid));
+    let itemObject = foundry.utils.deepClone(await fromUuid(data.uuid));
 
     if (!itemObject) return;
 
@@ -2092,7 +2075,7 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
     await this.item.update({
       system: {
         talents: {
-          [`-=${deleteId}`]: null
+          [deleteId]: new foundry.data.operators.ForcedDeletion()
         },
       },
     });
@@ -2115,7 +2098,7 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
     await this.item.update({
       system: {
         abilities: {
-          [`-=${deleteId}`]: null
+          [deleteId]: new foundry.data.operators.ForcedDeletion()
         },
       },
     });

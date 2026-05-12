@@ -2378,7 +2378,7 @@ export default class ImportHelpers {
           // Remove and repopulate all modifiers
           if (entry.system?.attributes) {
             for (let k of Object.keys(entry.system.attributes)) {
-              if (!updateData.data.attributes.hasOwnProperty(k)) updateData.data.attributes[`-=${k}`] = null;
+              if (!updateData.data.attributes.hasOwnProperty(k)) updateData.data.attributes[k] = new foundry.data.operators.ForcedDeletion();
             }
           }
         }
@@ -2386,7 +2386,7 @@ export default class ImportHelpers {
           // Remove and repopulate all specializations
           if (entry.system?.specializations) {
             for (let k of Object.keys(entry.system.specializations)) {
-              if (!updateData.data.specializations.hasOwnProperty(k)) updateData.data.specializations[`-=${k}`] = null;
+              if (!updateData.data.specializations.hasOwnProperty(k)) updateData.data.specializations[k] = new foundry.data.operators.ForcedDeletion();
             }
           }
         }
@@ -2394,7 +2394,7 @@ export default class ImportHelpers {
           // Remove and repopulate all talents
           if (entry.system?.talents) {
             for (let k of Object.keys(entry.system.talents)) {
-              if (!updateData.data.talents.hasOwnProperty(k)) updateData.data.talents[`-=${k}`] = null;
+              if (!updateData.data.talents.hasOwnProperty(k)) updateData.data.talents[k] = new foundry.data.operators.ForcedDeletion();
             }
           }
         }
@@ -2402,12 +2402,12 @@ export default class ImportHelpers {
           // Remove and repopulate all abilities
           if (entry.system?.abilities) {
             for (let k of Object.keys(entry.system.abilities)) {
-              if (!updateData.data.abilities.hasOwnProperty(k)) updateData.data.abilities[`-=${k}`] = null;
+              if (!updateData.data.abilities.hasOwnProperty(k)) updateData.data.abilities[k] = new foundry.data.operators.ForcedDeletion();
             }
           }
         }
 
-        upd = foundry.utils.duplicate(entry);
+        upd = foundry.utils.deepClone(entry);
         updateData = migrateDataToSystem(updateData);
         CONFIG.logger.debug(`Updating ${type} ${dataType} ${data.name} : ${JSON.stringify(updateData)}`);
         try {
@@ -2757,7 +2757,7 @@ export default class ImportHelpers {
             const compendiumEntry = await ImportHelpers.findCompendiumEntityByImportId("Item", modifier.Key);
             if (compendiumEntry) {
               if (compendiumEntry?.type === "itemmodifier") {
-                const descriptor = foundry.utils.duplicate(compendiumEntry);
+                const descriptor = foundry.utils.deepClone(compendiumEntry);
                 descriptor.id = foundry.utils.randomID();
                 descriptor.system.rank = modifier?.Count ? parseInt(modifier.Count, 10) : 1;
                 output.itemmodifier.push(descriptor);

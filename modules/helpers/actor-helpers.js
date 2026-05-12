@@ -45,7 +45,7 @@ export default class ActorHelpers {
     // Remove attributes which are no longer used
     if (this.object.system?.attributes) {
       for (let k of Object.keys(this.object.system.attributes)) {
-        if (!attributes.hasOwnProperty(k)) attributes[`-=${k}`] = null;
+        if (!attributes.hasOwnProperty(k)) attributes[k] = new foundry.data.operators.ForcedDeletion();
       }
     }
 

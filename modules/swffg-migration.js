@@ -274,7 +274,7 @@ async function migrateTo1907() {
                   // the attribute is using an older form, update it to the new naming scheme
                   const nk = `attr${new Date().getTime()}`;
                   item.system.talents[`talent${i}`].attributes[nk] = attributes[attribute];
-                  item.system.talents[`talent${i}`].attributes[`-=${attribute}`] = null;
+                  item.system.talents[`talent${i}`].attributes[attribute] = new foundry.data.operators.ForcedDeletion();
                   delete item.system.talents[`talent${i}`].attributes[attribute];
                   // ensure further keys have a new entry
                   await new Promise(r => setTimeout(r, 1));
@@ -315,7 +315,7 @@ async function migrateTo1907() {
                   // the attribute is using an older form, update it to the new naming scheme
                   const nk = `attr${new Date().getTime()}`;
                   item.system.upgrades[`upgrade${i}`].attributes[nk] = attributes[attribute];
-                  item.system.upgrades[`upgrade${i}`].attributes[`-=${attribute}`] = null;
+                  item.system.upgrades[`upgrade${i}`].attributes[attribute] = new foundry.data.operators.ForcedDeletion();
                   delete item.system.upgrades[`upgrade${i}`].attributes[attribute];
                   // ensure further keys have a new entry
                   await new Promise(r => setTimeout(r, 1));
@@ -358,7 +358,7 @@ async function migrateTo1907() {
                   // the attribute is using an older form, update it to the new naming scheme
                   const nk = `attr${new Date().getTime()}`;
                   item.system.upgrades[`upgrade${i}`].attributes[nk] = attributes[attribute];
-                  item.system.upgrades[`upgrade${i}`].attributes[`-=${attribute}`] = null;
+                  item.system.upgrades[`upgrade${i}`].attributes[attribute] = new foundry.data.operators.ForcedDeletion();
                   delete item.system.upgrades[`upgrade${i}`].attributes[attribute];
                   // ensure further keys have a new entry
                   await new Promise(r => setTimeout(r, 1));

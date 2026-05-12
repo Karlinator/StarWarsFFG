@@ -331,7 +331,7 @@ export class itemEditor extends FormApplication  {
           for (let modKey of Object.keys(attachment.system.attributes)) {
             if (!Object.keys(formData.system.attributes).includes(modKey)) {
               CONFIG.logger.debug(`>> Detected key ${modKey} was removed, attempting to locate matching active effect`);
-              formData.system.attributes[`-=${modKey}`] = null;
+              formData.system.attributes[modKey] = new foundry.data.operators.ForcedDeletion();
               delete attachment.system.attributes[modKey];
               // delete the active effect
               const match = existingActiveEffects.find(i => i.name === modKey);
@@ -345,7 +345,7 @@ export class itemEditor extends FormApplication  {
           if (Object.keys(formData.system).includes("attributes")) {
             for (const modKey of Object.keys(formData.system.attributes)) {
               CONFIG.logger.debug(">>> Checking modKey", modKey);
-              if (modKey.startsWith("-=")) {
+              if (formData.system.attributes[modKey] instanceof foundry.data.operators.ForcedDeletion) {
                 CONFIG.logger.debug(`>>>> Skipping mod ${modKey} which will be deleted`);
                 // skip anything queued for deletion
                 continue;
@@ -397,7 +397,7 @@ export class itemEditor extends FormApplication  {
 
               for (const modKey of Object.keys(modifier.system.attributes)) {
                 CONFIG.logger.debug(">>> Checking modKey", modKey);
-                if (modKey.startsWith("-=")) {
+                if (modifier.system.attributes[modKey] instanceof foundry.data.operators.ForcedDeletion) {
                   CONFIG.logger.debug(`>>>> Skipping mod ${modKey} which will be deleted`);
                   // skip anything queued for deletion
                   continue;
@@ -470,7 +470,7 @@ export class itemEditor extends FormApplication  {
           // iterate over the mods on the existing item and remove them if they are not present in the new data
           for (let modKey of Object.keys(modifier.system.attributes)) {
             if (!Object.keys(formData.system.attributes).includes(modKey)) {
-              formData.system.attributes[`-=${modKey}`] = null;
+              formData.system.attributes[modKey] = new foundry.data.operators.ForcedDeletion();
               delete modifier.system.attributes[modKey];
               // delete the active effect
               const match = existingActiveEffects.find(i => i.name === modKey);
@@ -492,7 +492,7 @@ export class itemEditor extends FormApplication  {
 
       // iterate over the submitted data to find new/updated entries
       for (const modKey of Object.keys(formData.system.attributes)) {
-        if (modKey.startsWith("-=")) {
+        if (formData.system.attributes[modKey] instanceof foundry.data.operators.ForcedDeletion) {
           continue;
         }
 
@@ -674,7 +674,7 @@ export class talentEditor extends itemEditor {
     if (Object.keys(this.data.sourceObject.system.talents[this.data.talentId]).includes("attributes") && this.data.sourceObject.system.talents[this.data.talentId].attributes !== undefined) {
       for (const attrKey of Object.keys(this.data.sourceObject.system.talents[this.data.talentId].attributes)) {
         if (!Object.keys(formData.attributes).includes(attrKey)) {
-          formData.attributes[`-=${attrKey}`] = null;
+          formData.attributes[attrKey] = new foundry.data.operators.ForcedDeletion();
           delete this.data.sourceObject.system.attributes[attrKey];
           // delete the active effect
           const match = existingActiveEffects.find(i => i.name === attrKey);
@@ -691,7 +691,7 @@ export class talentEditor extends itemEditor {
     if (Object.keys(formData).includes("attributes")) {
       for (const modKey of Object.keys(formData.attributes)) {
         CONFIG.logger.debug(">>> Checking modKey", modKey);
-        if (modKey.startsWith("-=")) {
+        if (formData.attributes[modKey] instanceof foundry.data.operators.ForcedDeletion) {
           CONFIG.logger.debug(`>>>> Skipping mod ${modKey} which will be deleted`);
           // skip anything queued for deletion
           continue;
@@ -888,7 +888,7 @@ export class forcePowerEditor extends itemEditor {
     if (Object.keys(this.data.sourceObject.system.upgrades[this.data.upgradeId]).includes("attributes") && this.data.sourceObject.system.upgrades[this.data.upgradeId].attributes !== undefined) {
       for (const attrKey of Object.keys(this.data.sourceObject.system.upgrades[this.data.upgradeId].attributes)) {
         if (!Object.keys(formData.attributes).includes(attrKey)) {
-          formData.attributes[`-=${attrKey}`] = null;
+          formData.attributes[attrKey] = new foundry.data.operators.ForcedDeletion();
           delete this.data.sourceObject.system.attributes[attrKey];
           // delete the active effect
           const match = existingActiveEffects.find(i => i.name === attrKey);
@@ -905,7 +905,7 @@ export class forcePowerEditor extends itemEditor {
     if (Object.keys(formData).includes("attributes")) {
       for (const modKey of Object.keys(formData.attributes)) {
         CONFIG.logger.debug(">>> Checking modKey", modKey);
-        if (modKey.startsWith("-=")) {
+        if (formData.attributes[modKey] instanceof foundry.data.operators.ForcedDeletion) {
           CONFIG.logger.debug(`>>>> Skipping mod ${modKey} which will be deleted`);
           // skip anything queued for deletion
           continue;

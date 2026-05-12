@@ -593,7 +593,7 @@ export default class ModifierHelpers {
     formData = foundry.utils.deepClone(formData);
     if (Object.keys(formData.data).includes("attributes")) {
       for (const attr of Object.keys(formData.data.attributes)) {
-        if (attr.startsWith("-=attr")) {
+        if (formData.data.attributes[attr] instanceof foundry.data.operators.ForcedDeletion) {
           delete formData.data.attributes[attr];
         }
       }
@@ -712,7 +712,7 @@ export default class ModifierHelpers {
       for (let k of Object.keys(item.system.attributes)) {
         const match = existing.find(i => i.name === k);
         if (!attributes.hasOwnProperty(k)) {
-          attributes[`-=${k}`] = null;
+          attributes[k] = new foundry.data.operators.ForcedDeletion();
           // delete the matching active effect
           if (match) {
             toDelete.push(match.id);

@@ -104,9 +104,6 @@ Hooks.once("init", async function () {
   CONFIG.Item.documentClass = ItemFFG;
   CONFIG.ActiveEffect.documentClass = ActiveEffectFFG;
 
-  // we do not want the legacy active effect transfer mode
-  // also, reeeeeeeeeeeeeeeee
-  CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Define custom Roll class
   CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);
@@ -627,7 +624,7 @@ Hooks.once("init", async function () {
 
         CONFIG.FFG.skills = ordered;
         skillModifierTypes.forEach((modType) => {
-          CONFIG.FFG.allowableModifierChoices[modType] = foundry.utils.duplicate(ordered);
+          CONFIG.FFG.allowableModifierChoices[modType] = foundry.utils.deepClone(ordered);
         });
       }
     } catch (err) {
@@ -1177,7 +1174,7 @@ Hooks.once("ready", async () => {
 
             Object.keys(actor.system.skills).forEach((skill) => {
               if (!skills.skills[skill] && !actor.system.skills?.[skill]?.nontheme) {
-                skills.skills[`-=${skill}`] = null;
+                skills.skills[skill] = new foundry.data.operators.ForcedDeletion();
               } else {
                 skills.skills[skill] = {
                   ...skills.skills[skill],

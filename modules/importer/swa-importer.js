@@ -672,7 +672,7 @@ export default class SWAImporter extends FormApplication {
                       }
 
                       let w = new CONFIG.Item.documentClass(templatedData, { temporary: true });
-                      adversary.items.push(foundry.utils.duplicate(w));
+                      adversary.items.push(foundry.utils.deepClone(w));
                     }
                   });
                 }

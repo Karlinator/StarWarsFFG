@@ -82,7 +82,7 @@ export default class PopoutModifiers extends FormApplication {
     // Remove attributes which are no longer used
     if (this.object.system?.attributes) {
       for (let k of Object.keys(this.object.system.attributes)) {
-        if (!attributes.hasOwnProperty(k)) attributes[`-=${k}`] = null;
+        if (!attributes.hasOwnProperty(k)) attributes[k] = new foundry.data.operators.ForcedDeletion();
       }
     }
 
@@ -96,7 +96,7 @@ export default class PopoutModifiers extends FormApplication {
       // Remove attributes which are no longer used
       if (this.object.parent.system.upgrades[this.object.keyname].attributes) {
         for (let k of Object.keys(this.object.parent.system.upgrades[this.object.keyname].attributes)) {
-          if (!attributes.hasOwnProperty(k)) attributes[`-=${k}`] = null;
+          if (!attributes.hasOwnProperty(k)) attributes[k] = new foundry.data.operators.ForcedDeletion();
         }
       }
 
@@ -121,7 +121,7 @@ export default class PopoutModifiers extends FormApplication {
       if (this.object.parent.system.talents[this.object.keyname].attributes) {
         for (let k of Object.keys(this.object.parent.system.talents[this.object.keyname].attributes)) {
           if (!attributes.hasOwnProperty(k)) {
-            attributes[`-=${k}`] = null;
+            attributes[k] = new foundry.data.operators.ForcedDeletion();
           }
         }
       }
@@ -150,7 +150,7 @@ export default class PopoutModifiers extends FormApplication {
       const syncFormData = foundry.utils.deepClone(formData);
       if (syncFormData?.data?.attributes) {
         for (const attr of Object.keys(syncFormData.data.attributes)) {
-          if (attr.startsWith("-=")) {
+          if (syncFormData.data.attributes[attr] instanceof foundry.data.operators.ForcedDeletion) {
             delete syncFormData.data.attributes[attr];
           }
         }

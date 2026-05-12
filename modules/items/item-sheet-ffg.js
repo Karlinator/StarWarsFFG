@@ -147,6 +147,7 @@ export class ItemSheetFFG extends foundry.appv1.sheets.ItemSheet {
         break;
       case "criticalinjury":
       case "criticaldamage":
+      case "malignancy":
         this.position.width = 320;
         this.position.height = 500;
         break;
